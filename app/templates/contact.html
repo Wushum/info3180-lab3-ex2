@@ -1,0 +1,41 @@
+<!doctype html>
+
+<html>
+
+<head>
+<title>Lab 3</title>    
+</head>
+
+<body>
+    
+    
+<form method = "POST" enctype = "mutlipart/form-data" action = "{{url_for('contact')}}">   
+    
+    <h2>CONTACT FORM</h2><br>
+    
+    <p>Fill in this form to contact the site Owner</p><br>
+    
+    Name: (Required*)<br>
+    Pleae enter your full name<br>
+    <input type = "text" name = "fname"><br><br>
+    
+    Email: (Required*)<br>
+    Pleae enter your email address<br>
+    <input type = "text" email = "email"><br><br>
+    
+    Subject: (Required*)<br>
+    Pleae enter the subject for your message<br>
+    <input type = "text" subject = "subject"><br><br>
+    
+    <label>Message: (Required*)<br>
+    Pleae enter the message you would like to send<br> <textarea cols="45" rows="5" name = "Message"></textarea><br>
+    
+
+    <input type = submit value = "Send">
+    
+    
+    </form>
+</body>
+
+
+</html>

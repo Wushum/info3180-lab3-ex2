@@ -7,6 +7,7 @@ This file creates your application.
 
 from app import app
 from flask import render_template, request, redirect, url_for
+import smtplib
 
 
 ###
@@ -23,8 +24,41 @@ def home():
 def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
+    
+
+def send_email(from_name, from_email, from_subject, from_message):
+    from_addr = "winston13lindsay@gmail.com"
+    to_addr = "yannick.lynfatt@uwimona.edu.jm"
+    from_name = "Winston"
+    to_name = "Yannick"
+    
+    message = """From: {} <{}>
+    To: {} <{}>
+    
+    Subject: {}
+    {}
+    """
+    message_to_send = message.format(from_name, from_addr, to_name, to_addr, from_subject, message)
+    
+    # Credentials (if needed)
+    username = 'winston13lindsay@@gmail.com'
+    password = 'password'
+    # The actual mail send
+    server = smtplib.SMTP('smtp.gmail.com:587')
+    server.starttls()
+    server.login(username, password)
+    server.sendmail(from_addr, to_addr, message_to_send)
+    server.quit()
+    
+    
 
 
+@app.route('/contact', methods=['POST', 'GET'])
+def contact():
+    if request.method == 'POST':
+        send_email(request.form['name'], request.form['email'], request.form['subject'], request.form['message'])
+    return render_template('contact.html')
+    
 ###
 # The functions below should be applicable to all Flask apps.
 ###
