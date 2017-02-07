@@ -41,7 +41,7 @@ def send_email(from_name, from_email, from_subject, from_message):
     message_to_send = message.format(from_name, from_addr, to_name, to_addr, from_subject, message)
     
     # Credentials (if needed)
-    username = 'winston13lindsay@@gmail.com'
+    username = 'winston13lindsay@gmail.com'
     password = 'password'
     # The actual mail send
     server = smtplib.SMTP('smtp.gmail.com:587')
