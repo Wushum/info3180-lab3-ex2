@@ -1,17 +1,17 @@
-<!doctype html>
+{%extends "base.html"%}
 
-<html>
+<!--<html>-->
 
-<head>
-<title>Lab 3</title>    
-</head>
+<!--<head>-->
+<!--<title>Lab 3</title>    -->
+<!--</head>-->
 
-<body>
-    
+<!--<body>-->
+ {%block main%}   
     
 <form method = "POST" enctype = "mutlipart/form-data" action = "{{url_for('contact')}}">   
     
-    <h2>CONTACT FORM</h2><br>
+    <h3>CONTACT FORM</h3><br>
     
     <p>Fill in this form to contact the site Owner</p><br>
     
@@ -27,7 +27,7 @@
     Pleae enter the subject for your message<br>
     <input type = "text" subject = "subject"><br><br>
     
-    <label>Message: (Required*)<br>
+    <label>Message: (Required*)</label><br>
     Pleae enter the message you would like to send<br> <textarea cols="45" rows="5" name = "message"></textarea><br>
     
 
@@ -35,7 +35,8 @@
     
     
     </form>
-</body>
+<!--</body>-->
 
 
-</html>
+<!--</html>-->
+{% endblock %}
