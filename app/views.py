@@ -5,10 +5,11 @@ Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
 
+import smtplib
 from app import app
 from flask import render_template, request, redirect, url_for, flash
-import smtplib
 from forms import ContactForm
+
 
 
 
@@ -25,23 +26,44 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Winston Lindsay")
     
 
-def send_email(from_name, from_email, from_subject, message):
+@app.route('/contact', methods=['POST', 'GET'])
+def contact():
+    #contact_form = ContactForm()
+    
+    app.secret_key = 'win$t0n'
+    if request.method == 'POST':
+        
+       #if contact_form.validate_on_submit():
+            
+        
+            # from_name = request.form['name']
+            # from_addr = request.form['email']
+            # subject = request.form['subject']
+            # msg = request.form['msg']
+            # send_email(from_name, from_addr, subject, msg)
+        #if ContactForm.validate_on_submit():
+            send_email(request.form['name'], request.form['email'], request.form['subject'], request.form['msg'])
+            flash('Email successfully sent')
+    return render_template('contact.html')
+    
+ 
+def send_email(name, email, subject, message):
     from_addr = "wnlindsay@yahoo.com"
     to_addr = "winston13lindsay@gmail.com"
-    from_name = "Winston"
+    #from_name = "name"
     to_name = "Winston"
     subject = "Test Email"  
-    msg = "This is a test email for lab  3 of Info3180"
+    msg = message
     message = """From: {} <{}>
         To: {} <{}>
         
         Subject: {}
         {}
         """
-    message_to_send = message.format(from_name, from_addr, to_name, to_addr, subject, msg)
+    message_to_send = message.format(name, email, to_name, to_addr, subject, msg)
         
         # Credentials (if needed)
     username = 'winston13lindsay@gmail.com'
@@ -51,18 +73,7 @@ def send_email(from_name, from_email, from_subject, message):
     server.starttls()
     server.login(username, password)
     server.sendmail(from_addr, to_addr, message_to_send)
-    server.quit()
-    
-
-@app.route('/contact', methods=['POST', 'GET'])
-def contact():
-    form = ContactForm()
-    if request.method == 'POST':
-        # if ContactForm.validate_on_submit():
-            send_email(request.form['name'], request.form['email'], request.form['subject'], request.form['message'])
-            flash('Email successfully sent')
-    return render_template('contact.html', form=ContactForm)
-    
+    server.quit()    
     
 
 ###
